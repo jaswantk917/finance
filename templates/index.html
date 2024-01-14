@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+
+<main class="container py-5 text-center">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th class="text-start">Symbols</th>
+            <th class="text-end">Shares</th>
+            <th class="text-end">Price</th>
+            <th class="text-end">TOTAL</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for stock in stocks %}
+                <tr>
+                    <td class="text-start">{{ stock["stock_symbol"] }}</td>
+                    <td class="text-end">{{ stock["amount"] }}</td>
+                    <td class="text-end">{{ usd(stock["price"]) }}</td>
+                    <td class="text-end">{{ usd(stock["amount"]*stock["price"]) }}</td>
+                </tr>
+            {% endfor %}
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td class="border-0 fw-bold text-end" colspan="3">Cash</td>
+                <td class="border-0 w-bold text-end">{{ usd(cash) }}</td>
+            </tr>
+            <tr>
+                <td class="border-0 fw-bold text-end" colspan="3">Total</td>
+                <td class="border-0 w-bold text-end">{{ usd(total + cash) }}</td>
+            </tr>
+        </tfoot>
+    </table>
+</main>
+{% endblock %}
